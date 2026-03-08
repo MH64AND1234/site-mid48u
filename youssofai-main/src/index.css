@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 0% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 8%;
+
+    --radius: 0.75rem;
+
+    --chat-user: 0 0% 94%;
+    --chat-ai: 0 0% 100%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 26%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 91%;
+    --sidebar-ring: 0 0% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  code, pre {
+    font-family: 'Space Mono', monospace;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Markdown prose styles — luxe edition */
+.chat-prose {
+  @apply text-sm leading-relaxed;
+}
+
+/* Paragraphs */
+.chat-prose p {
+  @apply mb-3 last:mb-0;
+}
+
+/* Headings */
+.chat-prose h1 {
+  @apply text-xl font-bold mb-3 mt-5 pb-2 border-b border-border first:mt-0;
+}
+.chat-prose h2 {
+  @apply text-lg font-semibold mb-2.5 mt-4 pb-1.5 border-b border-border/60 first:mt-0;
+}
+.chat-prose h3 {
+  @apply text-base font-semibold mb-2 mt-3.5 first:mt-0;
+}
+.chat-prose h4 {
+  @apply text-sm font-semibold mb-1.5 mt-3 first:mt-0;
+}
+.chat-prose h5, .chat-prose h6 {
+  @apply text-xs font-semibold mb-1 mt-2.5 uppercase tracking-wider text-muted-foreground first:mt-0;
+}
+
+/* Inline code */
+.chat-prose code {
+  @apply bg-secondary px-1.5 py-0.5 rounded text-xs font-mono border border-border/40;
+}
+
+/* Code blocks */
+.chat-prose pre {
+  @apply bg-secondary p-4 rounded-lg overflow-x-auto mb-3;
+}
+.chat-prose pre code {
+  @apply bg-transparent p-0 border-0;
+}
+
+/* Lists */
+.chat-prose ul {
+  @apply ml-4 mb-3 list-disc;
+}
+.chat-prose ol {
+  @apply ml-4 mb-3 list-decimal;
+}
+.chat-prose li {
+  @apply mb-1.5 pl-0.5;
+}
+.chat-prose li > ul, .chat-prose li > ol {
+  @apply mt-1.5 mb-1;
+}
+.chat-prose li::marker {
+  @apply text-muted-foreground;
+}
+
+/* Task list (GFM checkboxes) */
+.chat-prose li:has(.chat-checkbox) {
+  list-style: none;
+  margin-left: -1rem;
+}
+.chat-checkbox {
+  @apply mr-2 rounded accent-primary;
+  vertical-align: middle;
+}
+
+/* Blockquotes */
+.chat-prose blockquote {
+  @apply border-l-[3px] border-primary/30 pl-4 py-1 my-3 text-muted-foreground italic;
+  background: hsl(var(--muted) / 0.4);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.chat-prose blockquote p {
+  @apply mb-2 last:mb-0;
+}
+.chat-prose blockquote blockquote {
+  @apply mt-2 border-primary/20;
+}
+
+/* Horizontal rules */
+.chat-prose hr {
+  @apply my-5 border-0 h-px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--border)) 20%,
+    hsl(var(--border)) 80%,
+    transparent
+  );
+}
+
+/* Links */
+.chat-link {
+  @apply text-primary underline underline-offset-2 decoration-primary/40 transition-colors;
+}
+.chat-link:hover {
+  @apply decoration-primary/80;
+}
+
+/* Tables */
+.chat-table-wrapper {
+  @apply overflow-x-auto my-3 rounded-lg border border-border;
+}
+.chat-table {
+  @apply w-full text-xs;
+}
+.chat-table thead {
+  @apply bg-secondary;
+}
+.chat-table th {
+  @apply px-3 py-2 text-left font-semibold text-foreground border-b border-border;
+}
+.chat-table td {
+  @apply px-3 py-2 border-b border-border/50;
+}
+.chat-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+.chat-table tbody tr:hover {
+  background: hsl(var(--muted) / 0.5);
+}
+.chat-table th[align="center"], .chat-table td[align="center"] {
+  @apply text-center;
+}
+.chat-table th[align="right"], .chat-table td[align="right"] {
+  @apply text-right;
+}
+
+/* Strikethrough */
+.chat-prose del {
+  @apply text-muted-foreground line-through decoration-muted-foreground/50;
+}
+
+/* Strong & emphasis */
+.chat-prose strong {
+  @apply font-semibold text-foreground;
+}
+.chat-prose em {
+  @apply italic;
+}
+
+/* Images */
+.chat-prose img {
+  @apply rounded-lg my-3 max-w-full shadow-sm border border-border;
+}
+
+/* Definition lists (fallback styling via HTML) */
+.chat-prose dl {
+  @apply my-3;
+}
+.chat-prose dt {
+  @apply font-semibold mt-2;
+}
+.chat-prose dd {
+  @apply ml-4 text-muted-foreground;
+}
